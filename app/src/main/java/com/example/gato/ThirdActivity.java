@@ -223,7 +223,7 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
 
     public void mostrarFelicitacion(){
         mostrarPuntos();
-        Toast toast = Toast.makeText(getApplicationContext(), "Ganaste " + jugadores[turno] + " Felicidades!! \n \n Da clic para seguir jugando" , Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Ganaste " + jugadores[turno] + " Felicidades!! \n \n Da clic aquí para seguir jugando" , Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
         toast.show();
     }
@@ -252,7 +252,7 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
 
         for(int i = 0; i < 3; i++ ){
             for(int j = 0; j < 3; j++ ){
-                btn[i][j].setImageResource(0);
+                btn[i][j].setImageResource(R.drawable.transparente);
                 raya[i][j].setImageResource(R.drawable.transparente);
             }
         }
