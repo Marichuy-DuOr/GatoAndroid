@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_color"
+    android:background="@drawable/bg_color2"
     tools:context="com.example.gato.SecondActivity"
     android:orientation="vertical">
 
@@ -13,21 +13,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="REGISTRO DE JUGADORES"
-        android:layout_marginBottom="30dp"
-        android:textSize="25dp"/>
+        android:text="Registro de Jugadores"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        android:textSize="40dp"/>
 
     <EditText
         android:id="@+id/jugador1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="jugador1"/>
+        android:hint="Jugador 1"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
 
     <EditText
         android:id="@+id/jugador2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="jugador2"/>
+        android:hint="Jugador 2"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"/>
 
 
     <Button
@@ -36,6 +48,8 @@
         android:layout_height="wrap_content"
         android:text="Comenzar Juego"
         android:layout_marginTop="30dp"
+        android:background="@drawable/boton"
+        android:textStyle="bold"
         android:onClick="onClick" />
 
 </LinearLayout>

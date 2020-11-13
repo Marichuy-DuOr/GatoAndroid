@@ -2,19 +2,24 @@ package com.example.gato;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 public class ThirdActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView texto1, texto2;
+    TextView texto1, texto2, puntos1, puntos2;
+    Button reiniciar, salir;
 
     String [] jugadores = new String[2];
+    int [] puntos = new int[10];
     ImageView [][] btn = new ImageView[3][3]; // botones de las imagenes del juego
     ImageView [][] raya = new ImageView[3][3]; //imagenes para marcar cuando ganas
 
@@ -33,10 +38,16 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_third);
         texto1 = (TextView) findViewById(R.id.texto1);
         texto2 = (TextView) findViewById(R.id.texto2);
+        puntos1 = (TextView) findViewById(R.id.puntos1);
+        puntos2 = (TextView) findViewById(R.id.puntos2);
+        reiniciar = (Button) findViewById(R.id.btnReiniciar);
+        salir = (Button) findViewById(R.id.btnSalir);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
+        puntos[0] = 0;
+        puntos[1] = 0;
         jugadores[0] = "";
         jugadores[1] = "";
 
@@ -91,6 +102,26 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
         turno = 0;
         posicion[0] = 0;
         posicion[1] = 0;
+
+        reiniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = getIntent();
+                finish();
+                startActivity(mIntent);
+            }
+        });
+
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -149,8 +180,12 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
             }
+        }else{
+            limpiar();
+            ganar=false;
         }
     }
+
 
     public void revisar (){
         for (int i = 0; i < 3; i++){
@@ -182,12 +217,46 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
             raya[2][0].setImageResource(ticTac[5]);
             ganar = true;
             mostrarFelicitacion();
+
         }
     }
 
     public void mostrarFelicitacion(){
-        Toast toast = Toast.makeText(getApplicationContext(), "Ganaste " + jugadores[turno] + " Felicidades!!" , Toast.LENGTH_LONG);
+        mostrarPuntos();
+        Toast toast = Toast.makeText(getApplicationContext(), "Ganaste " + jugadores[turno] + " Felicidades!! \n \n Da clic para seguir jugando" , Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
         toast.show();
+    }
+
+    public void mostrarPuntos(){
+        if (turno == 0){
+            puntos[0] = puntos[0] + 1;
+            puntos1.setText(String.valueOf(puntos[0]));
+        }else {
+            puntos[1] = puntos[1] + 1;
+            puntos2.setText(String.valueOf(puntos[1]));
+        }
+    }
+
+    public void limpiar(){
+
+        turno = 0;
+        posicion[0] = 0;
+        posicion[1] = 0;
+
+        for (int i = 0; i < 3; i++){ // el dos equivale a espacio libre en la matriz
+            for (int j = 0; j < 3; j++){
+                gato[i][j] = 2;
+            }
+        }
+
+        for(int i = 0; i < 3; i++ ){
+            for(int j = 0; j < 3; j++ ){
+                btn[i][j].setImageResource(0);
+                raya[i][j].setImageResource(R.drawable.transparente);
+            }
+        }
+
+
     }
 }
